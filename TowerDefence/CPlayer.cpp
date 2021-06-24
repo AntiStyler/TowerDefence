@@ -25,8 +25,15 @@ void CPlayer::CreateEntity()
 
 void CPlayer::DestroyEntity(CEntity* pEntity)
 {
-	delete pPlayer;
-	delete pEntity;
+	try
+	{
+		delete pPlayer;
+		delete pEntity;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "ERROR: " << e.what() << std::endl;
+	}
 }
 
 void CPlayer::SetPosition(float x, float y)
@@ -34,11 +41,10 @@ void CPlayer::SetPosition(float x, float y)
 	if (pPlayer)
 	{
 		pPlayer->setPosition(x, y);
+		return;
 	}
-	else
-	{
-		std::cout << "ERROR: player was nullptr." << std::endl;;
-	}
+
+	std::cout << "ERROR: player was nullptr." << std::endl;
 }
 
 void CPlayer::SetPosition(sf::Vector2<float> vec)
@@ -46,11 +52,10 @@ void CPlayer::SetPosition(sf::Vector2<float> vec)
 	if (pPlayer)
 	{
 		pPlayer->setPosition(vec);
+		return;
 	}
-	else
-	{
-		std::cout << "ERROR: player was nullptr." << std::endl;;
-	}
+
+	std::cout << "ERROR: player was nullptr." << std::endl;
 }
 
 sf::Vector2<float> CPlayer::GetPosition()
@@ -61,7 +66,8 @@ sf::Vector2<float> CPlayer::GetPosition()
 	}
 	else
 	{
-		std::cout << "ERROR: player was nullptr." << std::endl;;
+		std::cout << "ERROR: player was nullptr." << std::endl;
+		return sf::Vector2<float>(0.f, 0.f);
 	}
 }
 
@@ -70,11 +76,10 @@ void CPlayer::Move(sf::Vector2<float> offset)
 	if (pPlayer)
 	{
 		pPlayer->move(offset);
+		return;
 	}
-	else
-	{
-		std::cout << "ERROR: player was nullptr." << std::endl;;
-	}
+
+	std::cout << "ERROR: player was nullptr." << std::endl;
 }
 
 void CPlayer::Move(float x, float y)
@@ -82,20 +87,21 @@ void CPlayer::Move(float x, float y)
 	if (pPlayer)
 	{
 		pPlayer->move(x, y);
+		return;
 	}
-	else
-	{
-		std::cout << "ERROR: player was nullptr." << std::endl;;
-	}
+	
+	std::cout << "ERROR: player was nullptr." << std::endl;
 }
 
 EEntityType CPlayer::GetEntityType()
 {
+	// TODO: Add EntityType Handling
 	return EEntityType::kEntity_Type_Player;
 }
 
 EEntityStatus CPlayer::GetEntityStatus()
 {
+	// TODO: Add EntityType Handling
 	return EEntityStatus::kStatus_Alive;
 }
 
@@ -109,11 +115,10 @@ void CPlayer::UpdateEntity()
 	if (pPlayer)
 	{
 		pRender->draw(*pPlayer);
+		return;
 	}
-	else
-	{
-		std::cout << "ERROR: player was nullptr." << std::endl;;
-	}
+
+	std::cout << "ERROR: player was nullptr." << std::endl;
 }
 
 void CPlayer::SetRenderWindow(sf::RenderWindow* pRender)
@@ -121,11 +126,10 @@ void CPlayer::SetRenderWindow(sf::RenderWindow* pRender)
 	if (pRender)
 	{
 		this->pRender = pRender;
+		return;
 	}
-	else
-	{
-		std::cout << "ERROR: RenderWindow was nullptr." << std::endl;
-	}
+
+	std::cout << "ERROR: RenderWindow was nullptr." << std::endl;
 }
 
 sf::RenderWindow* CPlayer::GetRenderWindow()
@@ -134,10 +138,9 @@ sf::RenderWindow* CPlayer::GetRenderWindow()
 	{
 		return pRender;
 	}
-	else
-	{
-		std::cout << "ERROR: RenderWindow was nullptr." << std::endl;
-	}
+
+	std::cout << "ERROR: RenderWindow was nullptr." << std::endl;
+	return nullptr;
 }
 
 sf::RectangleShape* CPlayer::GetPlayer()
@@ -146,4 +149,7 @@ sf::RectangleShape* CPlayer::GetPlayer()
 	{
 		return pPlayer;
 	}
+
+	std::cerr << "ERROR: RenderWindow was nullptr." << std::endl;
+	return nullptr;
 }

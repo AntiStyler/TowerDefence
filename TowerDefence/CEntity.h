@@ -1,7 +1,6 @@
 #pragma once
 
-
-enum EEntityType
+enum class EEntityType
 {
 	kEntity_Type_Nothing,
 	kEntity_Type_Player,
@@ -9,7 +8,7 @@ enum EEntityType
 	kEntity_Type_Tower
 };
 
-enum EEntityStatus
+enum class EEntityStatus
 {
 	kStatus_Unkown,
 	kStatus_Alive,
@@ -31,8 +30,6 @@ public:
 	virtual EEntityStatus			GetEntityStatus() = 0;
 	virtual bool					GetImmunity() = 0;
 	virtual void					UpdateEntity() = 0;
-	virtual void					SetRenderWindow(sf::RenderWindow* pRender) = 0;
-	virtual sf::RenderWindow*		GetRenderWindow() = 0;
 
 	uint8_t* GetRandomizedRGB()
 	{
@@ -43,8 +40,5 @@ public:
 
 		return rgb;
 	}
-
-private:
-	sf::RenderWindow* window;
 };
 

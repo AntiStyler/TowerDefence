@@ -14,6 +14,10 @@ public:
 	void CloseGame();
 	void UpdateGame();
 	void EventHandler();
+
+	void CreateGameBoundaries();
+	void UpdateGameBoundaries();
+	void DeleteGameBoundaries();
 private:
 	sf::RenderWindow* pRender;
 	CEventHandler* pEventHandler;
@@ -24,6 +28,7 @@ private:
 	sf::Vector2f direction;
 	float magnitude = 0.f;
 
-
 	bool bGamePaused = false;
+
+	std::vector<sf::RectangleShape*> boundaries;
 };

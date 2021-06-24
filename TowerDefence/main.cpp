@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "CGame.h"
 
-//TODO: Add Multithreading
+const char* kWindowTitle = "Tower Defence";
 
-void Test()
-{
+constexpr unsigned int kWindowWidth = 1024;
+constexpr unsigned int kWindowHeight = 768;
 
-}
+constexpr unsigned int kFrameRateLimit = 60;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1024, 768), "Tower Defence");
-	window.setFramerateLimit(60);
+	sf::RenderWindow window(sf::VideoMode(1024, 768), kWindowTitle);
+	window.setFramerateLimit(kFrameRateLimit);
 
 	CGame* game = new CGame(&window);
 	std::thread gameThread(&CGame::StartGame, game);

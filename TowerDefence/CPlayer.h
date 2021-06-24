@@ -34,4 +34,7 @@ private:
 	sf::Vector2<float>		vecSize;
 	sf::Color				color;
 	sf::Vector2<float>		vecPosition;
+
+	float					health;
+	sf::Vector2<float>		velocity;
 };
